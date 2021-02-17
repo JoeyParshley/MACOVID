@@ -25,3 +25,7 @@ hs_err_pid*
 #IDE files
 .idea/
 *.iml
+
+#Word files
+~$*.doc
+~$*.docsx
