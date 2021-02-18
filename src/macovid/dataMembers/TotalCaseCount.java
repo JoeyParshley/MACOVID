@@ -1,5 +1,10 @@
 package macovid.dataMembers;
 
 public class TotalCaseCount  extends DataMember{
-  public TotalCaseCount(Integer count) { super("Total Case Count", count); }
+  int value;
+
+  public TotalCaseCount(Integer value) {
+    super(value);
+    this.value = value;
+  }
 }

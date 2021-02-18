@@ -1,6 +1,11 @@
 package macovid.dataMembers;
 
 public class Population extends DataMember{
-  public Population(Integer value) { super("name", value); }
+  int value;
+
+  public Population(Integer value) {
+    super(value);
+    this.value = value;
+  }
 }
 

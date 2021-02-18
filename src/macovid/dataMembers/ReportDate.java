@@ -1,5 +1,9 @@
 package macovid.dataMembers;
 
 public class ReportDate extends  DataMember{
-  public ReportDate(String date) { super("report date", date); }
+  String value;
+
+  public ReportDate(String value) {
+    super(value);
+  }
 }
