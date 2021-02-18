@@ -31,7 +31,17 @@ public class TestResult {
 
   public TestResult(Settlement settlement) {
     this.settlement = settlement;
+    cityTownName = settlement.getName();
+    cityTownPopulation = settlement.getPopulation();
+    totalCaseCount = settlement.getTotalCaseCount();
+    twoWeekCaseCount = settlement.getTwoWeekCaseCount();
+    totalTests = settlement.getTotalTestCount();
+    twoWeekTotalTests = settlement.getTwoWeekTestCount();
+    totalPositiveTests = settlement.getTotalPositiveTestCount();
+    testingRate = settlement.getTestingRate();
+    testResultsDate = settlement.getReportDate();
   }
+
   @Override
   public String toString() {
     return String.format(
@@ -46,5 +56,45 @@ public class TestResult {
         settlement.getTestingRate().getValue(),
         settlement.getReportDate().getValue()
     );
+  }
+
+  public Name getCityTownName() {
+    return cityTownName;
+  }
+
+  public Population getCityTownPopulation() {
+    return cityTownPopulation;
+  }
+
+  public TotalCaseCount getTotalCaseCount() {
+    return totalCaseCount;
+  }
+
+  public TwoWeekCaseCount getTwoWeekCaseCount() {
+    return twoWeekCaseCount;
+  }
+
+  public TotalTestCount getTotalTests() {
+    return totalTests;
+  }
+
+  public TwoWeekTestCount getTwoWeekTotalTests() {
+    return twoWeekTotalTests;
+  }
+
+  public TotalPositiveTestCount getTotalPositiveTests() {
+    return totalPositiveTests;
+  }
+
+  public TestingRate getTestingRate() {
+    return testingRate;
+  }
+
+  public ReportDate getTestResultsDate() {
+    return testResultsDate;
+  }
+
+  public Settlement getSettlement() {
+    return settlement;
   }
 }

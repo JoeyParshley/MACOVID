@@ -7,4 +7,7 @@ public class TestingRate  extends DataMember{
     super(value);
     this.value = value;
   }
+  public double getValue() {
+    return this.value;
+  }
 }

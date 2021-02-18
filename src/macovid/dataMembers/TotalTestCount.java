@@ -7,4 +7,8 @@ public class TotalTestCount  extends DataMember{
     super(value);
     this.value = value;
   }
+
+  public int getValue() {
+    return this.value;
+  }
 }

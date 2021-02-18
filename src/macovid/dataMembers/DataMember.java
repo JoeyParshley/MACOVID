@@ -7,10 +7,6 @@ public class DataMember<T> implements GenericDataMember<T> {
     this.value = value;
   }
 
-  public T getValue() {
-    return value;
-  }
-
   @Override
   public void setValue(T value) {}
 }

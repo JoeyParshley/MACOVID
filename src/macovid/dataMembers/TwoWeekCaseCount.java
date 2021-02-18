@@ -6,4 +6,8 @@ public class TwoWeekCaseCount extends DataMember{
     super(value);
     this.value = value;
   }
+
+  public int getValue() {
+    return this.value;
+  }
 }
