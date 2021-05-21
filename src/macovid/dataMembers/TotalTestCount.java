@@ -1,5 +1,14 @@
 package macovid.dataMembers;
 
 public class TotalTestCount  extends DataMember{
-  public TotalTestCount(Integer count) { super("Total Test Count", count); }
+  int value;
+
+  public TotalTestCount(Integer value) {
+    super(value);
+    this.value = value;
+  }
+
+  public int getValue() {
+    return this.value;
+  }
 }

@@ -1,5 +1,13 @@
 package macovid.dataMembers;
 
 public class TestingRate  extends DataMember{
-  public TestingRate(Double rate) { super("Testing Rate", rate); }
+  double value;
+
+  public TestingRate(Double value) {
+    super(value);
+    this.value = value;
+  }
+  public double getValue() {
+    return this.value;
+  }
 }

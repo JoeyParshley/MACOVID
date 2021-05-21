@@ -24,8 +24,8 @@ public class Main {
   public static String finalTestResults_file_path;
   public static String finalTestResults_file_name;
   public static final String CSV = ".csv";
-  public static List<Settlement> testResults = new ArrayList<Settlement>();
-  public static List<FinalTestResults> finalTestResults = new ArrayList<FinalTestResults>();
+  public static List<TestResult> testResults = new ArrayList<TestResult>();
+  public static List<FinalTestResult> finalTestResults = new ArrayList<FinalTestResult>();
 
   public static void main(String[] args) throws IOException {
 
@@ -40,13 +40,20 @@ public class Main {
     System.out.print("Enter the name of the final results file: ");
     finalTestResults_file_path = "src/macovid/";
     finalTestResults_file_name = scanner.next();
-    finalTestResults_file_path += finalTestResults_file_name;
+    finalTestResults_file_path += finalTestResults_file_name + CSV;
 
     readTestResults(testResults_file_path);
+    System.out.println();
+    System.out.println("=====================================================================");
+    System.out.println();
+    System.out.printf("Reporting data from [%s] and generating results to [%s].%n%n",
+        testResults_file_path,
+        finalTestResults_file_path
+    );
     System.out.println("=====================================================================");
     System.out.println();
     System.out.printf("Printing out the contents for the file: %s%s%n",testResults_file_name, CSV);
-    for (Settlement result : testResults){
+    for (TestResult result : testResults){
       System.out.print(result);
     }
 
@@ -63,26 +70,46 @@ public class Main {
     System.out.println();
     System.out.printf("%nPrinting out final results for the file: %s%s%n", finalTestResults_file_name, CSV);
 
-    for (Settlement result : testResults){
-
-      finalTestResults.add(new FinalTestResults( result));
-
-//      finalTestResults.add(new FinalTestResults(
-//          result.getCityTownName(),
-//          result.getCityTownPopulation(),
-//          result.getTotalCaseCount(),
-//          result.getTwoWeekCaseCount(),
-//          result.getTotalTests(),
-//          result.getTwoWeekTotalTests(),
-//          result.getTotalPositiveTests(),
-//          result.getTestingRate(),
-//          result.getTestResultsDate()
-//      ));
+    for (TestResult result : testResults){
+      // build the final results list by adding a finalResult built from each testResult
+      finalTestResults.add(getFinalTestResults(result));
     }
 
-    for (FinalTestResults result : finalTestResults){
+    for (FinalTestResult result : finalTestResults){
       System.out.print(result);
     }
+  }
+
+  /**
+   * getFinalTestResults will be called from loop over the testResults
+   *
+   * @param testResult
+   */
+  public static FinalTestResult getFinalTestResults(TestResult testResult){
+    Name name =
+        new Name(testResult.getCityTownName().getValue());
+    Population population =
+        new Population(testResult.getCityTownPopulation().getValue());
+    TotalCaseCount totalCaseCount =
+        new TotalCaseCount(testResult.getTotalCaseCount().getValue());
+    TwoWeekCaseCount twoWeekCaseCount =
+        new TwoWeekCaseCount(testResult.getTwoWeekCaseCount().getValue());
+    TotalTestCount totalTestCount =
+        new TotalTestCount(testResult.getTotalTests().getValue());
+    TwoWeekTestCount twoWeekTestCount =
+        new TwoWeekTestCount(testResult.getTwoWeekTotalTests().getValue());
+    TotalPositiveTestCount totalPositiveTestCount =
+        new TotalPositiveTestCount(testResult.getTotalPositiveTests().getValue());
+    TestingRate testingRate =
+        new TestingRate(testResult.getTestingRate().getValue());
+    ReportDate reportDate =
+        new ReportDate(testResult.getTestResultsDate().getValue());
+    Settlement settlement =
+        new Settlement( name, population, totalCaseCount, twoWeekCaseCount,
+            totalTestCount, twoWeekTestCount, totalPositiveTestCount, testingRate, reportDate);
+    FinalTestResult finalTestResult =
+        new FinalTestResult(settlement);
+    return finalTestResult;
   }
 
   public static void readTestResults(String filename) {
@@ -96,6 +123,7 @@ public class Main {
     TestingRate testingRate;
     ReportDate reportDate;
     Settlement settlement;
+    TestResult testResult;
 
     try (CSVReader reader = new CSVReader(new FileReader(testResults_file_path))) {
       String[] lineInArray;
@@ -108,14 +136,17 @@ public class Main {
         population = new Population(Integer.parseInt(lineInArray[1]));
         totalCaseCount = new TotalCaseCount(Integer.parseInt(lineInArray[2]));
         twoWeekCaseCount = new TwoWeekCaseCount(Integer.parseInt(lineInArray[3]));
-        totalPositiveTestCount = new TotalPositiveTestCount(Integer.parseInt(lineInArray[4]));
-        testingRate = new TestingRate(Double.parseDouble(lineInArray[5]));
-        reportDate = new ReportDate(lineInArray[6]);
+        totalTestCount = new TotalTestCount(Integer.parseInt(lineInArray[4]));
+        twoWeekTestCount = new TwoWeekTestCount(Integer.parseInt(lineInArray[5]));
+        totalPositiveTestCount = new TotalPositiveTestCount(Integer.parseInt(lineInArray[6]));
+        testingRate = new TestingRate(Double.parseDouble(lineInArray[7]));
+        reportDate = new ReportDate(lineInArray[8]);
 
         settlement = new Settlement( name, population, totalCaseCount, twoWeekCaseCount,
             totalTestCount, twoWeekTestCount, totalPositiveTestCount, testingRate, reportDate);
+        testResult = new TestResult(settlement);
 
-        testResults.add(settlement);
+        testResults.add(testResult);
       }
     } catch (IOException e) {
       e.printStackTrace();

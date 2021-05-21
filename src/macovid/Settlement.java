@@ -9,6 +9,11 @@ import macovid.dataMembers.TotalTestCount;
 import macovid.dataMembers.TwoWeekCaseCount;
 import macovid.dataMembers.TwoWeekTestCount;
 
+/**
+ * Settlement
+ *  -   Represents a settlement of the state could be a village/town/city etc.
+ *  -   Contains the raw data of the test results
+ */
 public class Settlement {
   private Name name;
   private Population population;
@@ -36,4 +41,39 @@ public class Settlement {
     this.reportDate = reportDate;
   }
 
+  public Name getName() {
+    return name;
+  }
+
+  public Population getPopulation() {
+    return population;
+  }
+
+  public TotalCaseCount getTotalCaseCount() {
+    return totalCaseCount;
+  }
+
+  public TwoWeekCaseCount getTwoWeekCaseCount() {
+    return twoWeekCaseCount;
+  }
+
+  public TotalTestCount getTotalTestCount() {
+    return totalTestCount;
+  }
+
+  public TwoWeekTestCount getTwoWeekTestCount() {
+    return twoWeekTestCount;
+  }
+
+  public TotalPositiveTestCount getTotalPositiveTestCount() {
+    return totalPositiveTestCount;
+  }
+
+  public TestingRate getTestingRate() {
+    return testingRate;
+  }
+
+  public ReportDate getReportDate() {
+    return reportDate;
+  }
 }
